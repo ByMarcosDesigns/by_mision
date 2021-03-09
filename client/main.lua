@@ -28,7 +28,7 @@ end)
 --Apartado Donde empezamos la mision 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(1)
+        local wait = 1300
 
         local lspd = vector3(-1095.587, -817.5297, 18.03516)
         local pos = GetEntityCoords(ped)
@@ -37,7 +37,7 @@ Citizen.CreateThread(function()
         if MisionStart == false then
             if Vdist2(GetEntityCoords(PlayerPedId(), false), lspd) < 2.5 then
                 ByNotify(pos.x, pos.y, pos.z + 0.99, "Presiona ~y~E ~w~para pedir una mision a Manuel")
-
+		wait = 0
                 if IsControlJustPressed(1,51) then
                     --print("Prueba")
                     startMission()
@@ -46,6 +46,7 @@ Citizen.CreateThread(function()
                     Collected = false
                 end
             end
+	    Citizen.Wait(wait)
         end
     end
 end)
